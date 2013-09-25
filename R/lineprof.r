@@ -1,12 +1,22 @@
+#' Line profiling.
+#' 
 #' @export
-lineprof <- function(code, interval = 0.02, torture = FALSE) {
+#' @examples
+#' 
+#' source(find_demo("read-delim.r"))
+#' source(find_demo("read-table.r"))
+#' wine <- find_demo("wine.csv")
+#' 
+#' lineprof(read.table2(wine, sep = ","), torture = TRUE)
+#' lineprof(read.delim(wine), torture = TRUE)
+lineprof <- function(code, interval = 0.01, torture = FALSE) {
   path <- profile(code, interval, torture)
   on.exit(unlink(path))
   
-  parse_mem_prof(path)
+  parse_prof(path)
 }
 
-profile <- function(code, interval = 0.02, torture = FALSE) {
+profile <- function(code, interval = 0.01, torture = FALSE) {
   prof_path <- tempfile(fileext = ".prof")
   
   if (torture) {

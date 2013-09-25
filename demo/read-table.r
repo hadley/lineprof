@@ -1,4 +1,4 @@
-read.table <-
+read.table2 <-
   function(file, header = FALSE, sep = "", quote = "\"'", dec = ".",
     row.names, col.names, as.is = !stringsAsFactors,
     na.strings = "NA", colClasses = NA,
