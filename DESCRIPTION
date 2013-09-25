@@ -12,4 +12,5 @@ Suggests:
     shiny,
     stringr
 Collate:
-    'parse-prof.r'
+    'lineprof.r'
+    'parse.r'

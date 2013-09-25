@@ -1,3 +1,4 @@
+export(lineprof)
 importFrom(stringr,str_replace_all)
 importFrom(stringr,str_split)
 importFrom(stringr,str_split_fixed)
