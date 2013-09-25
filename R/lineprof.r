@@ -8,7 +8,7 @@
 #' wine <- find_demo("wine.csv")
 #' 
 #' lineprof(read.table2(wine, sep = ","), torture = TRUE)
-#' lineprof(read.delim(wine), torture = TRUE)
+#' lineprof(read_delim(wine), torture = TRUE)
 #' @useDynLib lineprof
 lineprof <- function(code, interval = 0.01, torture = FALSE) {
   path <- profile(code, interval, torture)

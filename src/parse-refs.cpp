@@ -33,7 +33,7 @@ std::string slurpName(std::string::iterator& input) {
 }
 
 // [[Rcpp::export]]
-List parseLineProfiling(std::string input) {
+List parseLineProfileRefs(std::string input) {
   std::string::iterator iref = input.begin(), input_end = input.end();
   std::vector<std::string> refs, names;
 
@@ -41,8 +41,8 @@ List parseLineProfiling(std::string input) {
     if (*iref == ' ') {
       slurpSpace(iref); 
     } else if (*iref == '"') {
-      names.push_back(slurpName(iref));
       refs.push_back("");
+      names.push_back(slurpName(iref));
     } else {
       refs.push_back(slurpRef(iref));
       slurpSpace(iref); 

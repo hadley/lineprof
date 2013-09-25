@@ -13,6 +13,6 @@ source(find_demo("read-table.r"))
 wine <- find_demo("wine.csv")
 
 lineprof(read.table2(wine, sep = ","), torture = TRUE)
-lineprof(read.delim(wine), torture = TRUE)
+lineprof(read_delim(wine), torture = TRUE)
 }
 

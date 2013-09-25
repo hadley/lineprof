@@ -36,16 +36,25 @@ parse_prof <- function(path) {
   # Strip <GC> and collapse to one row per ref
   prof$source <- str_replace_all(prof$source, '"<GC>" ?', "")
   grp <- cumsum(c(FALSE, prof$source[-nrow(prof)] != prof$source[-1]))
+  src <- prof$source[!duplicated(grp)]
+  
   profsum <- aggregate(
     prof[c("time", "alloc", "release", "dups")], 
     list(g = grp), 
     sum)
   profsum$g <- NULL
-  profsum$source <- prof$source[!duplicated(grp)]
   
-  list(mem = prof, paths = labels$path)
+  # Parse refs and add list of dataframes column
+  refs <- lapply(src, parse_ref, paths = labels$path)
+  profsum$refs <- refs
+  
+  profsum
 }
 
+#' @importFrom stringr str_split_fixed
+parse_srcrefs <- function(f, ref, paths) {
+  browser()
+}
 
 #' @importFrom stringr str_split_fixed
 add_top_level_loc <- function(mem, paths) {

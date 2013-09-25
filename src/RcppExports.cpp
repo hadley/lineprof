@@ -5,15 +5,15 @@
 
 using namespace Rcpp;
 
-// parseLineProfiling
-List parseLineProfiling(std::string input);
-RcppExport SEXP lineprof_parseLineProfiling(SEXP inputSEXP) {
+// parseLineProfileRefs
+List parseLineProfileRefs(std::string input);
+RcppExport SEXP lineprof_parseLineProfileRefs(SEXP inputSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         std::string input = Rcpp::as<std::string >(inputSEXP);
-        List __result = parseLineProfiling(input);
+        List __result = parseLineProfileRefs(input);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

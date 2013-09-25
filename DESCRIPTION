@@ -16,4 +16,5 @@ Collate:
     'parse.r'
     'demo.r'
     'RcppExports.R'
+    'parse-ref.r'
 LinkingTo: Rcpp
