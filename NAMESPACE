@@ -1,3 +1,4 @@
+export(find_demo)
 export(lineprof)
 importFrom(stringr,str_replace_all)
 importFrom(stringr,str_split)
