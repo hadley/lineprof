@@ -15,3 +15,5 @@ Collate:
     'lineprof.r'
     'parse.r'
     'demo.r'
+    'RcppExports.R'
+LinkingTo: Rcpp

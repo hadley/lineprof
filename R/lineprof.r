@@ -9,6 +9,7 @@
 #' 
 #' lineprof(read.table2(wine, sep = ","), torture = TRUE)
 #' lineprof(read.delim(wine), torture = TRUE)
+#' @useDynLib lineprof
 lineprof <- function(code, interval = 0.01, torture = FALSE) {
   path <- profile(code, interval, torture)
   on.exit(unlink(path))
