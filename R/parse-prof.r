@@ -1,5 +1,3 @@
-library(stringr)
-
 mprofr <- function(code, interval = 0.02, torture = FALSE) {
   path <- mem_prof(code, interval, torture)
   parse_mem_prof(path)
@@ -23,6 +21,7 @@ mem_prof <- function(code, interval = 0.02, torture = FALSE) {
 }
 
 
+#' @importFrom stringr str_split str_replace_all str_trim
 parse_mem_prof <- function(path) {  
   # Parse header, including interval
   header <- readLines(path, n = 1)
@@ -59,6 +58,7 @@ parse_mem_prof <- function(path) {
 }
 
 
+#' @importFrom stringr str_split_fixed
 add_top_level_loc <- function(mem, paths) {
   linenum <- str_extract(mem$source, "[0-9]+#[0-9]+")
   pieces <- str_split_fixed(linenum, fixed("#"), n = 2)

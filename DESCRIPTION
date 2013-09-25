@@ -1,12 +1,15 @@
 Package: lineprof
 Type: Package
 Version: 0.1
-Authors@R: person("Hadley", "Wickham", 
-  email = "hadley@rstudio.com", role = c("aut", "cre"))
+Authors@R: person("Hadley", "Wickham",
+    email = "hadley@rstudio.com", role = c("aut", "cre"))
 License: GPL3
 Title: An alternative display for line profiling information
-Description: lineprof provides an informative, html-based, visualisation of 
-  line profiling data for both time and memory.
+Description: lineprof provides an informative, html-based, visualisation of
+    line profiling data for both time and memory.
 LazyData: true
 Suggests:
-    shiny
+    shiny,
+    stringr
+Collate:
+    'parse-prof.r'
