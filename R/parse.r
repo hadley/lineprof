@@ -46,14 +46,10 @@ parse_prof <- function(path) {
   
   # Parse refs and add list of dataframes column
   refs <- lapply(src, parse_ref, paths = labels$path)
-  profsum$refs <- refs
+  profsum$ref <- refs
   
+  class(profsum) <- c("lineprof", class(profsum))
   profsum
-}
-
-#' @importFrom stringr str_split_fixed
-parse_srcrefs <- function(f, ref, paths) {
-  browser()
 }
 
 #' @importFrom stringr str_split_fixed

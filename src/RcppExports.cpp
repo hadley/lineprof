@@ -5,6 +5,37 @@
 
 using namespace Rcpp;
 
+// contains
+int contains(CharacterVector haystack, CharacterVector needle);
+RcppExport SEXP lineprof_contains(SEXP haystackSEXP, SEXP needleSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        CharacterVector haystack = Rcpp::as<CharacterVector >(haystackSEXP);
+        CharacterVector needle = Rcpp::as<CharacterVector >(needleSEXP);
+        int __result = contains(haystack, needle);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// firstTRUE
+int firstTRUE(LogicalVector x);
+RcppExport SEXP lineprof_firstTRUE(SEXP xSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        LogicalVector x = Rcpp::as<LogicalVector >(xSEXP);
+        int __result = firstTRUE(x);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // parseLineProfileRefs
 List parseLineProfileRefs(std::string input);
 RcppExport SEXP lineprof_parseLineProfileRefs(SEXP inputSEXP) {

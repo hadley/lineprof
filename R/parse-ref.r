@@ -9,7 +9,8 @@ parse_ref <- function(ref, paths) {
   path <- paths[as.numeric(ref[, 1])]  
   line <- as.numeric(ref[, 2])
   
-  df <- data.frame(f = rev(f), path = rev(path), line = rev(line))
+  df <- data.frame(f = rev(f), path = rev(path), line = rev(line),
+    stringsAsFactors = FALSE)
   
   # Remove entries added by lineprof, profile and force 
   # (and any functions that call lineprof)
