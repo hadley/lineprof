@@ -1,16 +1,28 @@
+json <- function(x) {
+  path <- unique(paths(x))
+  if (length(path) == 1 && !is.na(path)) {
+    align(x)
+  } else {
+    reduce_depth(x, 2)
+  }
+}  
+
+
 shine <- function(x, ...) {
   require(shiny)
   
-  
-  ui <- bootstrapPage(
-    addResourcePath("lineprof", system.file("www", package = "lineprof")),
+  addResourcePath("lineprof", system.file("www", package = "lineprof"))
+  ui <- pageWithSidebar(
+    headerPanel("Line profiling"),
     sidebarPanel(
       textInput("nav", "Navigate to:"),
       radioButtons("type", "Type", c("loc", "calls")),
       actionButton("zoom", "Zoom")
     ),
-    tags$head(tags$script(src = 'lineprof/format-table.js')),
-    htmlOutput("profile")
+    mainPanel(
+      tags$head(tags$script(src = 'lineprof/format-table.js')),
+      htmlOutput("profile")
+    )
   )
   
   server <- function(input, output, session) {
@@ -29,7 +41,7 @@ shine <- function(x, ...) {
         }        
       }
       
-      session$sendCustomMessage(type = 'formatTable', html(x))
+      session$sendCustomMessage(type = 'formatTable', json(x))
     })
   }
   
