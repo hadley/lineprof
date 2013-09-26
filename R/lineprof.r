@@ -32,7 +32,8 @@ print.lineprof <- function(x, digits = 3, depth = 3,...) {
   x$release <- round(x$release, digits)
   
   ref <- vapply(x$ref, function(x) paste(x$f, collapse = "/"), character(1))
-  x$ref <- format(ref, align = "left")
+  x$call <- format(ref, align = "left")
+  x$ref <- NULL
   
   NextMethod(x)
 }
@@ -86,7 +87,7 @@ focus <- function(prof, f = NULL, filename = NULL, ref = NULL) {
   prof
 }
 
-align <- function(prof) {
+align <- function(prof, digits = 3) {
   path <- unique(vapply(prof$ref, function(x) x$path[[1]], character(1)))
   if (length(path) > 1) {
     stop("Profile refers to multiple files: ", 
@@ -95,19 +96,26 @@ align <- function(prof) {
       call. = FALSE)
   }
   
+  # Collapse summary to individual lines
   line <- vapply(prof$ref, function(x) x$line[[1]], double(1))
-  profsum <- aggregate(
+  collapse <- aggregate(
     prof[c("time", "alloc", "release", "dups")], 
     list(line = line), 
     sum)
+  collapse$alloc <- round(collapse$alloc, digits)
+  collapse$release <- round(collapse$release, digits)
   
+  # Read in code and align profiling data
   contents <- readLines(path)
-  lineup <- profsum[match(seq_along(contents), profsum$line), , drop = FALSE]
+  lineup <- collapse[match(seq_along(contents), collapse$line), , drop = FALSE]
   
-  out <- data.frame(src = contents, lineup)
+  out <- data.frame(src = contents, lineup, stringsAsFactors = FALSE)
   out$line <- NULL
+  out[is.na(out)] <- 0  
+  out$ref <- ifelse(is.na(lineup$line), NA, paste0(basename(path), "#", out$line))
   rownames(out) <- NULL
-  out[is.na(out)] <- 0
+  
+  out
 }
 
 reduce_depth <- function(prof, i = 2) {
