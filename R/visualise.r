@@ -9,7 +9,7 @@ format.lineprof <- function(x, digits = 3, ...) {
   x$ref <- vapply(x$ref, FUN.VALUE = character(1), function(x) {
     first <- x[1, , drop = FALSE]
     if (is.na(first$path)) {
-      deparse(x$f)
+      paste0(deparse(x$f), collapse = "")
     } else {
       paste0(basename(first$path), "#", first$line)
     }
