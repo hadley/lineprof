@@ -30,26 +30,34 @@ is.lineprof <- function(x) inherits(x, "lineprof")
 #' 
 #' @param f a character vector providing a sequence of calls
 #' @param filename name of the file
-focus <- function(prof, f = NULL, filename = NULL) {
-  stopifnot(is.lineprof(x))
+focus <- function(prof, f = NULL, filename = NULL, ref = NULL) {
+  stopifnot(is.lineprof(prof))
   
-  if (!xor(is.null(f), is.null(filename))) {
-    stop("Must supply one of f and filename")
+  if (sum(!is.null(f), !is.null(filename), !is.null(ref)) != 1) {
+    stop("Must supply one of f, filename or ref")
   }
   
   if (!is.null(f)) {
     stopifnot(is.character(f))
     
-    pos <- vapply(prof$ref, function(x) contains(x$f, f), integer(1))
+    find_pos <- function(x) contains(x$f, f)
     offset <- length(f) - 1
-  } else {
+  } else if (!is.null(filename)) {
     stopifnot(is.character(filename), length(filename) == 1)
    
-    filename_pos <- function(x) firstTRUE(basename(x$path) == filename)
-    pos <- vapply(prof$ref, filename_pos, integer(1))
+    find_pos <- function(x) firstTRUE(basename(x$path) == filename)
     offset <- -1L
+  } else if (!is.null(ref)) {
+    stopifnot(is.character(ref), length(ref) == 1)
+    
+    find_pos <- function(x) {
+      firstTRUE(paste0(basename(x$path), "#", x$line) == ref)
+    }
+    offset <- 1L
   }
-
+  
+  pos <- vapply(prof$ref, find_pos, integer(1))
+  
   prof <- prof[pos > 0, , drop = FALSE]
   pos <- pos[pos > 0]
   
@@ -81,7 +89,31 @@ align <- function(prof) {
   out$line <- NULL
   rownames(out) <- NULL
   out[is.na(out)] <- 0
+}
+
+show <- function(prof) {
+  ref <- vapply(prof$ref, function(x) paste(x$f, collapse = "/"), character(1))
   
+  prof$ref <- format(ref, align = "left")
+  prof
+}
+
+reduce_depth <- function(prof, i = 2) {
+  prof$ref <- lapply(prof$ref, function(x) {
+    x[seq_len(min(i, nrow(x))), , drop = FALSE]
+  })
+  collapse(prof)
+}
+
+collapse <- function(prof) {
+  ind <- c(FALSE, unlist(Map(identical, prof$ref[-1], prof$ref[-nrow(prof)])))
+  grp <- cumsum(!ind)
   
-  
+  col <- aggregate(
+    prof[c("time", "alloc", "release", "dups")], 
+    list(g = grp), 
+    sum)
+  col$ref <- prof$ref[!duplicated(grp)]
+  col$g <- NULL
+  col  
 }
