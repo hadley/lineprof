@@ -27,26 +27,39 @@ is.lineprof <- function(x) inherits(x, "lineprof")
 }
 
 #' @S3method format lineprof
-format.lineprof <- function(x, digits = 3, depth = 3, ...) {
-  max_depth <- max(vapply(x$ref, nrow, integer(1)))
-  if (max_depth > depth) {
-    message("Reducing depth to ", depth, " (from ", max_depth, ")")
-    x <- reduce_depth(x, depth)
-  }
-  
+format.lineprof <- function(x, digits = 3, ...) {
   x$alloc <- round(x$alloc, digits)
   x$release <- round(x$release, digits)
   
   ref <- vapply(x$ref, function(x) paste(x$f, collapse = "/"), character(1))
   x$call <- format(ref, align = "left")
-  x$ref <- NULL
+  
+  x$ref <- vapply(x$ref, FUN.VALUE = character(1), function(x) {
+    first <- x[1, , drop = FALSE]
+    if (is.na(first$path)) {
+      deparse(x$f)
+    } else {
+      paste0(basename(first$path), "#", first$line)
+    }
+  })
   
   class(x) <- "data.frame"
   x
 }
 
 #' @S3method print lineprof
-print.lineprof <- function(x, digits = 3, depth = 3,...) {
+print.lineprof <- function(x, digits = 3, depth = 2,...) {
+  max_depth <- max(vapply(x$ref, nrow, integer(1)))
+  if (max_depth > depth) {
+    message("Reducing depth to ", depth, " (from ", max_depth, ")")
+    x <- reduce_depth(x, depth)
+  }
+  
+  path <- unique(paths(x))
+  if (length(path) == 1 && !is.na(path)) {
+    message("Common path: ", basename(path))  
+  }
+  
   print(format(x, digits = digits, depth = depth, ...))
 }
 
