@@ -65,27 +65,6 @@ is.lineprof <- function(x) inherits(x, "lineprof")
   out
 }
 
-#' @S3method format lineprof
-format.lineprof <- function(x, digits = 3, ...) {
-  x$alloc <- round(x$alloc, digits)
-  x$release <- round(x$release, digits)
-  
-  ref <- vapply(x$ref, function(x) paste(x$f, collapse = "/"), character(1))
-  x$call <- format(ref, align = "left")
-  
-  x$ref <- vapply(x$ref, FUN.VALUE = character(1), function(x) {
-    first <- x[1, , drop = FALSE]
-    if (is.na(first$path)) {
-      deparse(x$f)
-    } else {
-      paste0(basename(first$path), "#", first$line)
-    }
-  })
-  
-  class(x) <- "data.frame"
-  x
-}
-
 #' @S3method print lineprof
 print.lineprof <- function(x, digits = 3, depth = 2,...) {
   max_depth <- max(vapply(x$ref, nrow, integer(1)))
