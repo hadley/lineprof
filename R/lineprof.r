@@ -21,7 +21,13 @@ is.lineprof <- function(x) inherits(x, "lineprof")
 
 
 #' @S3method print lineprof
-print.lineprof <- function(x, digits = 3, ...) {
+print.lineprof <- function(x, digits = 3, depth = 3,...) {
+  max_depth <- max(vapply(x$ref, nrow, integer(1)))
+  if (max_depth > depth) {
+    message("Reducing depth to ", depth, " (from ", max_depth, ")")
+    x <- reduce_depth(x, depth)
+  }
+  
   x$alloc <- round(x$alloc, digits)
   x$release <- round(x$release, digits)
   
