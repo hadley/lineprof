@@ -19,4 +19,6 @@ Collate:
     'RcppExports.R'
     'parse-ref.r'
     'profile.R'
+    'align.r'
+    'focus.r'
 LinkingTo: Rcpp

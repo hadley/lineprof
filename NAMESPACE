@@ -1,4 +1,5 @@
 S3method("[",lineprof)
+S3method(format,lineprof)
 S3method(print,lineprof)
 export(find_demo)
 export(lineprof)
