@@ -81,8 +81,10 @@ focus <- function(prof, f = NULL, filename = NULL, ref = NULL) {
   prof <- prof[pos > 0, , drop = FALSE]
   pos <- pos[pos > 0]
   
-  prof$ref <- Map(function(ref, pos) ref[(offset + pos):nrow(ref), , drop = FALSE], 
-    prof$ref, pos)
+  prof$ref <- Map(function(ref, pos) {
+    if ((offset + pos) > nrow(ref)) return(ref[0, , drop = FALSE])
+    ref[seq(offset + pos, nrow(ref), by = 1), , drop = FALSE]
+  }, prof$ref, pos)
   
   prof
 }
@@ -112,7 +114,7 @@ align <- function(prof, digits = 3) {
   out <- data.frame(src = contents, lineup, stringsAsFactors = FALSE)
   out$line <- NULL
   out[is.na(out)] <- 0  
-  out$ref <- ifelse(is.na(lineup$line), NA, paste0(basename(path), "#", out$line))
+  out$ref <- ifelse(is.na(lineup$line), NA, paste0(basename(path), "#", lineup$line))
   rownames(out) <- NULL
   
   out
