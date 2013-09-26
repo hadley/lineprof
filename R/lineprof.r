@@ -73,11 +73,18 @@ reduce_depth <- function(prof, i = 2) {
   prof$ref <- lapply(prof$ref, function(x) {
     x[seq_len(min(i, nrow(x))), , drop = FALSE]
   })
-  collapse(prof)
+  collapse(prof, ignore.path = TRUE)
 }
 
-collapse <- function(prof) {
-  index <- c(FALSE, unlist(Map(identical, prof$ref[-1], prof$ref[-nrow(prof)])))
+collapse <- function(prof, ignore.path = FALSE) {
+  if (ignore.path) {
+    # Only needs to compare calls
+    call <- vapply(prof$ref, function(x) paste(x$f, collapse = "\u001F"), 
+      character(1))
+    index <- c(FALSE, call[-1] == call[-length(call)])    
+  } else {
+    index <- c(FALSE, unlist(Map(identical, prof$ref[-1], prof$ref[-nrow(prof)]))) 
+  }
   group <- cumsum(!index)
   
   collapsed <- rowsum(prof[c("time", "alloc", "release", "dups")], group, 
