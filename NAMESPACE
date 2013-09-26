@@ -1,3 +1,5 @@
+S3method("[",lineprof)
+S3method(print,lineprof)
 export(find_demo)
 export(lineprof)
 importFrom(stringr,str_replace_all)

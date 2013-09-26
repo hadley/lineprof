@@ -8,13 +8,15 @@ Title: An alternative display for line profiling information
 Description: lineprof provides an informative, html-based, visualisation of
     line profiling data for both time and memory.
 LazyData: true
-Suggests:
-    shiny,
+Imports:
     stringr
+Suggests:
+    shiny
 Collate:
     'lineprof.r'
     'parse.r'
     'demo.r'
     'RcppExports.R'
     'parse-ref.r'
+    'profile.R'
 LinkingTo: Rcpp

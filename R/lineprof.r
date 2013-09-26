@@ -19,12 +19,25 @@ lineprof <- function(code, interval = 0.01, torture = FALSE) {
 
 is.lineprof <- function(x) inherits(x, "lineprof")
 
+
+#' @S3method print lineprof
+print.lineprof <- function(x, digits = 3, ...) {
+  x$alloc <- round(x$alloc, digits)
+  x$release <- round(x$release, digits)
+  
+  ref <- vapply(x$ref, function(x) paste(x$f, collapse = "/"), character(1))
+  x$ref <- format(ref, align = "left")
+  
+  NextMethod(x)
+}
+
 #' @S3method [ lineprof
 "[.lineprof" <- function(x, ...) {
   out <- NextMethod()
-  class(out) <- c("lineprof", class(out))
+  class(out) <- c("lineprof", "data.frame")
   out
 }
+
 
 #' Focus on 
 #' 
@@ -91,13 +104,6 @@ align <- function(prof) {
   out[is.na(out)] <- 0
 }
 
-show <- function(prof) {
-  ref <- vapply(prof$ref, function(x) paste(x$f, collapse = "/"), character(1))
-  
-  prof$ref <- format(ref, align = "left")
-  prof
-}
-
 reduce_depth <- function(prof, i = 2) {
   prof$ref <- lapply(prof$ref, function(x) {
     x[seq_len(min(i, nrow(x))), , drop = FALSE]
@@ -113,6 +119,6 @@ collapse <- function(prof) {
     na.rm = TRUE, reorder = FALSE)
   collapsed$ref <- prof$ref[!duplicated(group)]
   
-  class(collapsed) <- c("lineprof", class(collapsed))
+  class(collapsed) <- c("lineprof", "data.frame")
   collapsed
 }
