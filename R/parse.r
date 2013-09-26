@@ -33,23 +33,11 @@ parse_prof <- function(path) {
   prof$release <- abs(pmin(0, mem_alloc))
   prof$mem <- NULL
   
-  # Strip <GC> and collapse to one row per ref
+  # Strip <GC>, parse refs and collapse
   prof$source <- str_replace_all(prof$source, '"<GC>" ?', "")
-  grp <- cumsum(c(FALSE, prof$source[-nrow(prof)] != prof$source[-1]))
-  src <- prof$source[!duplicated(grp)]
+  prof$ref <- lapply(prof$source, parse_ref, paths = labels$path)
   
-  profsum <- aggregate(
-    prof[c("time", "alloc", "release", "dups")], 
-    list(g = grp), 
-    sum)
-  profsum$g <- NULL
-  
-  # Parse refs and add list of dataframes column
-  refs <- lapply(src, parse_ref, paths = labels$path)
-  profsum$ref <- refs
-  
-  class(profsum) <- c("lineprof", class(profsum))
-  profsum
+  collapse(prof)
 }
 
 #' @importFrom stringr str_split_fixed

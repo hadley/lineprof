@@ -106,14 +106,13 @@ reduce_depth <- function(prof, i = 2) {
 }
 
 collapse <- function(prof) {
-  ind <- c(FALSE, unlist(Map(identical, prof$ref[-1], prof$ref[-nrow(prof)])))
-  grp <- cumsum(!ind)
+  index <- c(FALSE, unlist(Map(identical, prof$ref[-1], prof$ref[-nrow(prof)])))
+  group <- cumsum(!index)
   
-  col <- aggregate(
-    prof[c("time", "alloc", "release", "dups")], 
-    list(g = grp), 
-    sum)
-  col$ref <- prof$ref[!duplicated(grp)]
-  col$g <- NULL
-  col  
+  collapsed <- rowsum(prof[c("time", "alloc", "release", "dups")], group, 
+    na.rm = TRUE, reorder = FALSE)
+  collapsed$ref <- prof$ref[!duplicated(group)]
+  
+  class(collapsed) <- c("lineprof", class(collapsed))
+  collapsed
 }
