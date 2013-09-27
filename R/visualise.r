@@ -4,7 +4,7 @@ format.lineprof <- function(x, digits = 3, ...) {
   x$release <- round(x$release, digits)
   
   ref <- vapply(x$ref, function(x) paste(x$f, collapse = "/"), character(1))
-  x$call <- format(ref, align = "left")
+  x$src <- format(ref, align = "left")
   
   x$ref <- vapply(x$ref, FUN.VALUE = character(1), function(x) {
     first <- x[1, , drop = FALSE]

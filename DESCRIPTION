@@ -11,7 +11,8 @@ LazyData: true
 Imports:
     stringr
 Suggests:
-    shiny
+    shiny,
+    shinySlickgrid
 Collate:
     'lineprof.r'
     'parse.r'
