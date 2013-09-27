@@ -39,8 +39,6 @@ Shiny.addCustomMessageHandler("formatTable",
       data.src = [data.src]
       data.ref = [data.ref]
     }
-    console.log(data);
-    x = data;
 
     max_alloc = Math.max.apply(null, data.alloc);
     max_time = Math.max.apply(null, data.time);

@@ -28,7 +28,6 @@ shine <- function(x, ...) {
   server <- function(input, output, session) {
     update_table <- function() {
       msg <- json(stack$top())
-      str(msg)
       session$sendCustomMessage(type = 'formatTable', msg)
     }
 
