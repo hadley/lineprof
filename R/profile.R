@@ -29,10 +29,15 @@ line_profile <- function(code, interval = 0.01, torture = FALSE) {
 #' @param path path to line profiling data
 parse_prof <- function(path) {
   # Parse header, including interval
-  header <- readLines(path, n = 1)
-  opts <- str_split(header, ": ")[[1]]
+  header <- readLines(path, n = 2)
+  if (length(header) < 2) {
+    stop("No parsing data available. Maybe your function was too fast?", 
+      call. = FALSE)
+  }
+  
+  opts <- str_split(header[[1]], ": ")[[1]]
   interval <- as.numeric(str_split(opts[length(opts)], "=")[[1]][2]) / 1e6
-
+  
   raw <- read.delim(path, sep = ":", skip = 1, header = FALSE,
     stringsAsFactors = FALSE, quote = "")
 
