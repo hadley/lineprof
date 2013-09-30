@@ -79,6 +79,8 @@ Shiny.addCustomMessageHandler("formatTable",
 );
 
 var percent_bar = function(val, max, suffix) {
+  if (val == 0) return "";
+
   return "<span class='bar' " + 
     "style = 'width:" + (val / max) * 100 + "%' " + 
     "title = '" + val + suffix + "'></span>";
