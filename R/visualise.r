@@ -1,3 +1,49 @@
+#' Print reduced line profiling call stack.
+#' 
+#' By default, whenever you print a line profile, it is collapsed to two levels
+#' deep.  You can override this using the \code{depth} parameter. 
+#' \code{reduce_depth} is the function that implements this behaviour - you
+#' may want to use it if you're processing the line profiling data in other 
+#' ways.
+#' 
+#' @param x a line profiling object
+#' @param depth depth of calls
+#' @param digits number of digits to use for performance summaries
+#' @param ... other arguments passed on to \code{\link{format}}
+#' @export
+#' @keywords internal
+#' @examples
+#' # Line profiling the profile parsing code
+#' x <- parse_prof(find_demo("read-delim.prof"))
+#'
+#' x
+#' print(x, depth = 3)
+#' print(x, depth = Inf)
+#' @S3method print lineprof
+print.lineprof <- function(x, digits = 3, depth = 2, ...) {
+  max_depth <- max(vapply(x$ref, nrow, integer(1)))
+  if (max_depth > depth) {
+    message("Reducing depth to ", depth, " (from ", max_depth, ")")
+    x <- reduce_depth(x, depth)
+  }
+  
+  path <- unique(paths(x))
+  if (length(path) == 1 && !is.na(path)) {
+    message("Common path: ", basename(path))  
+  }
+  
+  print(format(x, digits = digits, depth = depth, ...))
+}
+
+#' @rdname print.lineprof
+#' @export
+reduce_depth <- function(x, depth = 2) {
+  x$ref <- lapply(x$ref, function(x) {
+    x[seq_len(min(depth, nrow(x))), , drop = FALSE]
+  })
+  collapse(x, ignore.path = TRUE)
+}
+
 #' @S3method format lineprof
 format.lineprof <- function(x, digits = 3, ...) {
   x$alloc <- round(x$alloc, digits)
@@ -19,8 +65,13 @@ format.lineprof <- function(x, digits = 3, ...) {
   x
 }
 
-align <- function(prof, digits = 3) {
-  path <- unique(paths(prof))
+
+#' Align line profiling data with source code
+#' 
+#' @inheritParams print.lineprof
+#' @export
+align <- function(x, digits = 3) {
+  path <- unique(paths(x))
   if (length(path) > 1) {
     stop("Profile refers to multiple files: ", 
       paste(basename(path), collapse = ", "), 
@@ -32,9 +83,9 @@ align <- function(prof, digits = 3) {
   }
   
   # Collapse summary to individual lines
-  line <- vapply(prof$ref, function(x) x$line[[1]], double(1))
+  line <- vapply(x$ref, function(x) x$line[[1]], double(1))
   collapse <- aggregate(
-    prof[c("time", "alloc", "release", "dups")], 
+    x[c("time", "alloc", "release", "dups")], 
     list(line = line), 
     sum)
   collapse$alloc <- round(collapse$alloc, digits)
