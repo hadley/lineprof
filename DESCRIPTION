@@ -15,7 +15,6 @@ Suggests:
     shinySlickgrid
 Collate:
     'lineprof.r'
-    'parse.r'
     'demo.r'
     'RcppExports.R'
     'parse-ref.r'
