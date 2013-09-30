@@ -1,8 +1,8 @@
-\name{find_demo}
-\alias{find_demo}
+\name{find_ex}
+\alias{find_ex}
 \title{Locate built in demos}
 \usage{
-  find_demo(path)
+  find_ex(path)
 }
 \arguments{
   \item{path}{path to file (within demo directory)}

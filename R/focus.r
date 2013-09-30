@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' # Line profiling the profile parsing code
-#' (x <- lineprof(parse_prof(find_demo("read-delim.prof"))))
+#' (x <- lineprof(parse_prof(find_ex("read-delim.prof"))))
 #'
 #' # Zoom into line 38
 #' (x1 <- focus(x, ref = "parse.r#38"))

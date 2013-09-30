@@ -37,8 +37,8 @@
 #' @param x a line profiling dataset
 #' @export
 #' @examples
-#' source(find_demo("read-delim.r"))
-#' wine <- find_demo("wine.csv")
+#' source(find_ex("read-delim.r"))
+#' wine <- find_ex("wine.csv")
 #'
 #' x <- lineprof(read_delim(wine, sep = ","), torture = TRUE)
 #' \dontrun{

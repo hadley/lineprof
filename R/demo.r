@@ -5,8 +5,8 @@
 #' @param path path to file (within demo directory)
 #' @export
 #' @keywords internal
-find_demo <- function(path) {
-  found <- system.file("demo", path, package = "lineprof")
+find_ex <- function(path) {
+  found <- system.file("examples", path, package = "lineprof")
 
   not_found <- found == ""
   if (any(not_found)) {

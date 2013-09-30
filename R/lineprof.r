@@ -56,9 +56,9 @@
 #'   simulate a smaller \code{interval}.
 #' @export
 #' @examples
-#' source(find_demo("read-delim.r"))
-#' source(find_demo("read-table.r"))
-#' wine <- find_demo("wine.csv")
+#' source(find_ex("read-delim.r"))
+#' source(find_ex("read-table.r"))
+#' wine <- find_ex("wine.csv")
 #'
 #' x1 <- lineprof(read.table2(wine, sep = ","), torture = TRUE)
 #' x2 <- lineprof(read_delim(wine), torture = TRUE)

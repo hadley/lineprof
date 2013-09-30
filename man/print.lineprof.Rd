@@ -28,7 +28,7 @@
 }
 \examples{
 # Line profiling the profile parsing code
-x <- parse_prof(find_demo("read-delim.prof"))
+x <- parse_prof(find_ex("read-delim.prof"))
 
 x
 print(x, depth = 3)
