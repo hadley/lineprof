@@ -12,7 +12,8 @@ escape_string = function(text) {
   return (text + "").replace(/"/g,'\\"');
 }
 var cols = [
-  {id: "src", name: "Source code", field: "src", width: 450, cssClass: "code"},
+  {id: "lineno", name: "#", field: "lineno", width: 20, cssClass: "lineno"},
+  {id: "src", name: "Source code", field: "src", width: 420, cssClass: "code"},
   {id: "time", name: "t", field: "time", width: 60, toolTip: "Time (s)"},
   {
     id: "release", name: "r", field: "release", width: 30, cssClass: "negative",
@@ -31,6 +32,8 @@ var slickGridOpts = {
   enableColumnReorder: false,
   enableCellNavigation: true,
   defaultFormatter: html_formatter,
+  syncColumnCellResize: true,
+  fullWidthRows: true,
 };
 
 Shiny.addCustomMessageHandler("formatTable",
@@ -64,6 +67,7 @@ Shiny.addCustomMessageHandler("formatTable",
         d["src"] = escape_html(data.src[i]);
       }
       
+      d["lineno"] = i;
       d["time"] = percent_bar(data.time[i], max_time, " s");
       d["release"] = percent_bar(data.release[i], max_release, " MB");
       d["alloc"] = percent_bar(data.alloc[i], max_alloc, " MB");

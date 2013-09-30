@@ -29,7 +29,15 @@
   border-bottom: 1px solid #ccc;
 }
 
-div.code {
+.slick-cell.code, .slick-cell.lineno {
   font-family: Inconsolata, monospace;
   white-space: pre;
+}
+.slick-cell.code {
+  padding-left: 4px;
+}
+
+.slick-cell.lineno {
+  text-align: right;
+  padding-right: 4px;
 }
