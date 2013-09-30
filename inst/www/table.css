@@ -1,17 +1,18 @@
-.positive-bar, .negative-bar {
+.bar {
   display: inline-block;
   height: 100%;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  background-color: #333;
+  -moz-top-border-radius: 0 4px 4px 0;
+  -webkit-border-radius: 0 4px 4px 0;
+  background-color: #666;
 }
 
-.negative-bar {
-  background-color: red;
-}
-
-.slick-cell.right {
+.slick-cell.negative {
   text-align: right;
+}
+.slick-cell.negative .bar {
+  background-color: #C7333F;
+  -moz-top-border-radius: 4px 0 0 4px;
+  -webkit-border-radius: 4px 0 0 4px;
 }
 
 
