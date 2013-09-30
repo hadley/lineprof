@@ -5,6 +5,7 @@
 #' into the file that occupies the majority of the current level - this is
 #' particularly useful for \code{\link{gctorture}}.
 #' 
+#' @param x a line profile
 #' @param f a character vector providing a sequence of calls
 #' @param filename base name of the file
 #' @param ref a reference of the form \code{"filename.r#lineno"}
@@ -22,8 +23,8 @@
 #'
 #' # Zoom into line 21
 #' (x3 <- focus(x2, ref = "parse-ref.r#21"))
-focus <- function(prof, f = NULL, filename = NULL, ref = NULL) {
-  stopifnot(is.lineprof(prof))
+focus <- function(x, f = NULL, filename = NULL, ref = NULL) {
+  stopifnot(is.lineprof(x))
   
   if (sum(!is.null(f), !is.null(filename), !is.null(ref)) != 1) {
     stop("Must supply one of f, filename or ref")
@@ -48,17 +49,17 @@ focus <- function(prof, f = NULL, filename = NULL, ref = NULL) {
     offset <- 1L
   }
   
-  pos <- vapply(prof$ref, find_pos, integer(1))
+  pos <- vapply(x$ref, find_pos, integer(1))
   
-  prof <- prof[pos > 0, , drop = FALSE]
+  x <- x[pos > 0, , drop = FALSE]
   pos <- pos[pos > 0]
   
-  prof$ref <- Map(function(ref, pos) {
+  x$ref <- Map(function(ref, pos) {
     if ((offset + pos) > nrow(ref)) return(ref[0, , drop = FALSE])
     ref[seq(offset + pos, nrow(ref), by = 1), , drop = FALSE]
-  }, prof$ref, pos)
+  }, x$ref, pos)
   
-  prof
+  x
 }
 
 #' @rdname focus

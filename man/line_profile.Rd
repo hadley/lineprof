@@ -1,9 +1,9 @@
-\name{profile}
+\name{line_profile}
+\alias{line_profile}
 \alias{parse_prof}
-\alias{profile}
 \title{Profile and parse output}
 \usage{
-  profile(code, interval = 0.01, torture = FALSE)
+  line_profile(code, interval = 0.01, torture = FALSE)
 
   parse_prof(path)
 }

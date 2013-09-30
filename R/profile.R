@@ -6,7 +6,7 @@
 #' @keywords internal
 #' @inheritParams lineprof
 #' @export
-profile <- function(code, interval = 0.01, torture = FALSE) {
+line_profile <- function(code, interval = 0.01, torture = FALSE) {
   prof_path <- tempfile(fileext = ".prof")
   
   if (torture) {
@@ -23,7 +23,7 @@ profile <- function(code, interval = 0.01, torture = FALSE) {
   prof_path
 }
 
-#' @rdname profile
+#' @rdname line_profile
 #' @importFrom stringr str_split str_replace_all str_trim
 #' @export
 #' @param path path to line profiling data

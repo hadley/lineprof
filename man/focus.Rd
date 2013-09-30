@@ -3,11 +3,13 @@
 \alias{focus}
 \title{Focus in on selected parts of the profile.}
 \usage{
-  focus(prof, f = NULL, filename = NULL, ref = NULL)
+  focus(x, f = NULL, filename = NULL, ref = NULL)
 
   auto_focus(x)
 }
 \arguments{
+  \item{x}{a line profile}
+
   \item{f}{a character vector providing a sequence of
   calls}
 

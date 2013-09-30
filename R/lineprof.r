@@ -69,7 +69,7 @@
 #' }
 #' @useDynLib lineprof
 lineprof <- function(code, interval = 0.001, torture = FALSE) {
-  path <- profile(code, interval, torture)
+  path <- line_profile(code, interval, torture)
   on.exit(unlink(path))
   
   parse_prof(path)
