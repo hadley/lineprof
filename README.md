@@ -9,6 +9,8 @@ The `lineprof` package makes it easy to understand the performance (time and mem
 devtools::install_github("lineprof")
 ```
 
+Note that `lineprof` contains a little C++ code, so you'll need a [development environment](http://www.rstudio.com/ide/docs/packages/prerequisites). 
+
 The two most important functions are `lineprof()`, which does the line profiling, and `shine()` which displays the resulting object in an interactive shiny app:
 
 ```r
