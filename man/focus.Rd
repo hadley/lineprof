@@ -1,16 +1,41 @@
 \name{focus}
+\alias{auto_focus}
 \alias{focus}
-\title{Focus on}
+\title{Focus in on selected parts of the profile.}
 \usage{
   focus(prof, f = NULL, filename = NULL, ref = NULL)
+
+  auto_focus(x)
 }
 \arguments{
   \item{f}{a character vector providing a sequence of
   calls}
 
-  \item{filename}{name of the file}
+  \item{filename}{base name of the file}
+
+  \item{ref}{a reference of the form
+  \code{"filename.r#lineno"}}
 }
 \description{
-  Focus on
+  \code{focus} allows you to navigate a complicated call
+  stack with a flexible navigation specification.
+  \code{auto_focus} is called automatically to zoom into
+  the file that occupies the majority of the current level
+  - this is particularly useful for
+  \code{\link{gctorture}}.
+}
+\examples{
+# Line profiling the profile parsing code
+(x <- lineprof(parse_prof(find_demo("read-delim.prof"))))
+
+# Zoom into line 38
+(x1 <- focus(x, ref = "parse.r#38"))
+
+# Zoom into the lapply
+(x2 <- focus(x1, f = c("lapply", "FUN")))
+align(x2)
+
+# Zoom into line 21
+(x3 <- focus(x2, ref = "parse-ref.r#21"))
 }
 
