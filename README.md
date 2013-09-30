@@ -20,9 +20,9 @@ x <- lineprof(read_delim(wine, sep = ","), torture = TRUE)
 shine(x)
 ```
 
-# Visualisation
+## Visualisation
 
-![shiny app screen shot](http://i.imgur.com/ksD7mv9.png)
+![shiny app screen shot](http://i.imgur.com/nSCtqsM.png)
 
 `lineprof` displays five variables for each line of code:
 
@@ -34,6 +34,6 @@ shine(x)
 
 You can navigate around the call stack by clicking on the link source code. Hover over individual bars to see the exact values.
 
-# Thanks
+## Thanks
 
 A big thanks go to Duncan Murdoch and Luke Tierney for creating the line profiling code questions and answering my many questions about how it works. Similar, I'd like to thank Joe Cheng and Winston Chang for answering all my questions about shiny.
