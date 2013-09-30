@@ -60,7 +60,7 @@ Shiny.addCustomMessageHandler("formatTable",
   
       if (data.ref[i]) {
         var link = "<a href = '#' " + 
-          "onClick = 'navigate(\"" + escape_string(data.ref[i]) + "\")'>" +
+          "onClick = 'return navigate(\"" + escape_string(data.ref[i]) + "\")'>" +
           escape_html(data.src[i]) + "</a>";
         d["src"] = link;
       } else {
@@ -88,6 +88,6 @@ var percent_bar = function(val, max, suffix) {
 
 // https://github.com/jcheng5/leaflet-shiny/blob/master/inst/www/binding.js#L34
 var navigate = function(ref) {
-  Shiny.onInputChange("navigate", ref);  
+  Shiny.onInputChange("navigate", ref);
   return false;
 };
