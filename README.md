@@ -7,6 +7,7 @@ The `lineprof` package makes it easy to understand the performance (time and mem
 ```r
 # install.packages("devtools")
 devtools::install_github("lineprof")
+devtools::install_github("shiny-slickgrid", "wch")
 ```
 
 Note that `lineprof` contains a little C++ code, so you'll need a [development environment](http://www.rstudio.com/ide/docs/packages/prerequisites). 
