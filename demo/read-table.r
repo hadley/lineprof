@@ -223,4 +223,4 @@ read.table2 <-
     data
   }
 
-environment(read.table) <- environment(read.csv)
+environment(read.table2) <- environment(read.csv)
