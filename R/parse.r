@@ -36,8 +36,8 @@ parse_prof <- function(path) {
   # Strip <GC>, parse refs and collapse
   prof$source <- str_replace_all(prof$source, '"<GC>" ?', "")
   prof$ref <- lapply(prof$source, parse_ref, paths = labels$path)
-  
-  collapse(prof)
+
+  auto_zoom(collapse(prof))
 }
 
 #' @importFrom stringr str_split_fixed

@@ -60,7 +60,10 @@ source(find_demo("read-delim.r"))
 source(find_demo("read-table.r"))
 wine <- find_demo("wine.csv")
 
-lineprof(read.table2(wine, sep = ","), torture = TRUE)
-lineprof(read_delim(wine), torture = TRUE)
+x1 <- lineprof(read.table2(wine, sep = ","), torture = TRUE)
+x2 <- lineprof(read_delim(wine), torture = TRUE)
+
+shine(x1)
+shine(x2)
 }
 

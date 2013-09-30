@@ -21,6 +21,7 @@ shine <- function(x, ...) {
     } else {
       zoomed <- focus(x, ref = ref)
     }
+    zoomed <- auto_zoom(zoomed)
     
     stack$push(zoomed)
   }

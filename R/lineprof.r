@@ -46,8 +46,11 @@
 #' source(find_demo("read-table.r"))
 #' wine <- find_demo("wine.csv")
 #' 
-#' lineprof(read.table2(wine, sep = ","), torture = TRUE)
-#' lineprof(read_delim(wine), torture = TRUE)
+#' x1 <- lineprof(read.table2(wine, sep = ","), torture = TRUE)
+#' x2 <- lineprof(read_delim(wine), torture = TRUE)
+#' 
+#' shine(x1)
+#' shine(x2)
 #' @useDynLib lineprof
 lineprof <- function(code, interval = 0.001, torture = FALSE) {
   path <- profile(code, interval, torture)
@@ -108,7 +111,28 @@ collapse <- function(prof, ignore.path = FALSE) {
   collapsed <- rowsum(prof[c("time", "alloc", "release", "dups")], group, 
     na.rm = TRUE, reorder = FALSE)
   collapsed$ref <- prof$ref[!duplicated(group)]
-  
   class(collapsed) <- c("lineprof", "data.frame")
+  
   collapsed
+}
+
+# Automatically zoom to majority file
+auto_zoom <- function(x) {
+  # tapply automatically drops missing x
+  paths <- basename(paths(x))
+  prop_time <- tapply(x$time, paths, sum) / sum(x$time)
+    
+  # Don't zoom if:
+  # * no src refs (i.e. all paths are missing)
+  # * already single file that is 100%
+  # * no file uses more than 95%
+  if (length(prop_time) == 0) return(x)
+  if (length(prop_time) == 1 && prop_time == 1) return(x)
+  if (max(prop_time) < 0.95) return(x)
+  
+  i <- which.max(prop_time)
+  message("Zooming to ", names(prop_time)[i], " (", floor(prop_time[i] * 100), 
+    "% of total time)")
+  
+  x[paths == names(prop_time)[i] & !is.na(paths), , drop = FALSE] 
 }

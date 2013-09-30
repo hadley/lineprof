@@ -22,4 +22,5 @@ Collate:
     'profile.R'
     'focus.r'
     'visualise.r'
+    'shiny.r'
 LinkingTo: Rcpp
