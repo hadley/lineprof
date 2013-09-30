@@ -13,10 +13,16 @@ escape_string = function(text) {
 }
 var cols = [
   {id: "src", name: "Source code", field: "src", width: 450, cssClass: "code"},
-  {id: "time", name: "t", field: "time", width: 60},
-  {id: "release", name: "r", field: "release", width: 30, cssClass: "negative"},
-  {id: "alloc", name: "a", field: "alloc", width: 30},
-  {id: "dups", name: "d", field: "dups", width: 30}
+  {id: "time", name: "t", field: "time", width: 60, toolTip: "Time (s)"},
+  {
+    id: "release", name: "r", field: "release", width: 30, cssClass: "negative",
+    toolTip: "Memory released (MB)"
+  },
+  {
+    id: "alloc", name: "a", field: "alloc", width: 30, 
+    toolTip: "Memory allocated (MB)"
+  },
+  {id: "dups", name: "d", field: "dups", width: 30, toolTip: "Duplications"}
 ];
 
 var slickGridOpts = {
@@ -40,8 +46,8 @@ Shiny.addCustomMessageHandler("formatTable",
       data.ref = [data.ref]
     }
 
-    max_alloc = Math.max.apply(null, data.alloc);
     max_time = Math.max.apply(null, data.time);
+    max_alloc = Math.max.apply(null, data.alloc);
     max_release = Math.max.apply(null, data.release);
     max_dups = Math.max.apply(null, data.dups);
     
@@ -58,20 +64,20 @@ Shiny.addCustomMessageHandler("formatTable",
         d["src"] = escape_html(data.src[i]);
       }
       
-      d["time"] = percent_bar(data.time[i], max_time);
-      d["release"] = percent_bar(data.release[i], max_release);
-      d["alloc"] = percent_bar(data.alloc[i], max_alloc);
-      d["dups"] = percent_bar(data.dups[i], max_dups);
+      d["time"] = percent_bar(data.time[i], max_time, " s");
+      d["release"] = percent_bar(data.release[i], max_release, " MB");
+      d["alloc"] = percent_bar(data.alloc[i], max_alloc, " MB");
+      d["dups"] = percent_bar(data.dups[i], max_dups, "");
     }
     
     grid = new Slick.Grid("#profile", rows, cols, slickGridOpts);
   }
 );
 
-var percent_bar = function(val, max, spanClass) {
+var percent_bar = function(val, max, suffix) {
   return "<span class='bar' " + 
     "style = 'width:" + (val / max) * 100 + "%' " + 
-    "title = '" + val + "'></span>";
+    "title = '" + val + suffix + "'></span>";
 };
 
 // https://github.com/jcheng5/leaflet-shiny/blob/master/inst/www/binding.js#L34
