@@ -19,7 +19,8 @@
 #' x
 #' print(x, depth = 3)
 #' print(x, depth = Inf)
-#' @S3method print lineprof
+#' @method print lineprof
+#' @export
 print.lineprof <- function(x, digits = 3, depth = 2, ...) {
   max_depth <- max(vapply(x$ref, nrow, integer(1)))
   if (max_depth > depth) {

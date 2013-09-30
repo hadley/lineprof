@@ -3,7 +3,7 @@
 \alias{reduce_depth}
 \title{Print reduced line profiling call stack.}
 \usage{
-  print.lineprof(x, digits = 3, depth = 2, ...)
+  \method{print}{lineprof} (x, digits = 3, depth = 2, ...)
 
   reduce_depth(x, depth = 2)
 }

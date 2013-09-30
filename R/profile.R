@@ -68,7 +68,7 @@ parse_prof <- function(path) {
   auto_focus(collapse(prof))
 }
 
-#' @importFrom stringr str_split_fixed
+#' @importFrom stringr str_split_fixed str_extract fixed
 add_top_level_loc <- function(mem, paths) {
   linenum <- str_extract(mem$source, "[0-9]+#[0-9]+")
   pieces <- str_split_fixed(linenum, fixed("#"), n = 2)
