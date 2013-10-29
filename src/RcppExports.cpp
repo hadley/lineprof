@@ -12,8 +12,8 @@ BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        CharacterVector haystack = Rcpp::as<CharacterVector >(haystackSEXP);
-        CharacterVector needle = Rcpp::as<CharacterVector >(needleSEXP);
+        Rcpp::traits::input_parameter< CharacterVector >::type haystack(haystackSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type needle(needleSEXP );
         int __result = contains(haystack, needle);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
@@ -28,7 +28,7 @@ BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        LogicalVector x = Rcpp::as<LogicalVector >(xSEXP);
+        Rcpp::traits::input_parameter< LogicalVector >::type x(xSEXP );
         int __result = firstTRUE(x);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
@@ -43,7 +43,7 @@ BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        std::string input = Rcpp::as<std::string >(inputSEXP);
+        Rcpp::traits::input_parameter< std::string >::type input(inputSEXP );
         List __result = parseLineProfileRefs(input);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
