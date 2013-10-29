@@ -101,9 +101,9 @@ shine <- function(x) {
     )
   )
 
-  runApp(list(ui = ui, server = server))
+  runApp(list(ui = ui, server = server), 
+    launch.browser = getOption("viewer", utils::browseURL))
 }
-
 
 # x <- new_stack()
 # x$push(1)
