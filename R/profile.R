@@ -39,7 +39,8 @@ parse_prof <- function(path) {
   interval <- as.numeric(str_split(opts[length(opts)], "=")[[1]][2]) / 1e6
   
   raw <- read.delim(path, sep = ":", skip = 1, header = FALSE,
-    stringsAsFactors = FALSE, quote = "")
+    stringsAsFactors = FALSE, quote = "",
+    col.names = c("V1", "V2", "V3", "V4", "V5", "V6")) # Force 6 columns
 
   # Separate file labels and profiling data
   is_label <- raw$V1 != ""
