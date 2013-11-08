@@ -54,6 +54,7 @@ parse_prof <- function(path) {
   prof <- raw[!is_label, ]
   prof$V1 <- NULL
   prof$V2 <- as.numeric(prof$V2)
+  prof$V3 <- as.numeric(prof$V3)
   names(prof) <- c("small_v", "big_v", "nodes", "dups", "source")
 
   # Add time info, and compute total memory (rounded to meg's)
