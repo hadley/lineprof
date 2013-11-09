@@ -44,7 +44,9 @@ parse_prof <- function(path) {
   # Separate file labels and profiling data
   is_label <- raw$V1 != ""
 
-  labels <- raw[is_label, 1:2]
+  labels <- raw[is_label, ]
+  labels[, 2] <- apply(labels[, 2:ncol(labels)], 1, function(x) paste(x[!is.na(x)],collapse=":"))
+  labels <- labels[, 1:2]
   names(labels) <- c("label", "path")
   labels$label <- as.numeric(str_replace_all(labels$label, "[^0-9]+", ""))
   labels$path <- str_trim(labels$path)
@@ -54,6 +56,7 @@ parse_prof <- function(path) {
   prof <- raw[!is_label, ]
   prof$V1 <- NULL
   prof$V2 <- as.numeric(prof$V2)
+  prof$V3 <- as.numeric(prof$V3)
   names(prof) <- c("small_v", "big_v", "nodes", "dups", "source")
 
   # Add time info, and compute total memory (rounded to meg's)
