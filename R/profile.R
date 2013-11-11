@@ -28,34 +28,36 @@ line_profile <- function(code, interval = 0.01, torture = FALSE) {
 #' @export
 #' @param path path to line profiling data
 parse_prof <- function(path) {
-  # Parse header, including interval
-  header <- readLines(path, n = 2)
-  if (length(header) < 2) {
+  lines <- readLines(path)
+  if (length(lines) < 2) {
     stop("No parsing data available. Maybe your function was too fast?", 
       call. = FALSE)
   }
   
-  opts <- str_split(header[[1]], ": ")[[1]]
+  # Parse header, including interval
+  opts <- str_split(lines[[1]], ": ")[[1]]
   interval <- as.numeric(str_split(opts[length(opts)], "=")[[1]][2]) / 1e6
+  lines <- lines[-1]
   
-  raw <- read.delim(path, sep = ":", skip = 1, header = FALSE,
-    stringsAsFactors = FALSE, quote = "")
-
   # Separate file labels and profiling data
-  is_label <- raw$V1 != ""
+  is_label <- grepl("^#", lines)
 
-  labels <- raw[is_label, 1:2]
-  names(labels) <- c("label", "path")
-  labels$label <- as.numeric(str_replace_all(labels$label, "[^0-9]+", ""))
-  labels$path <- str_trim(labels$path)
-  rownames(labels) <- NULL
+  label_lines <- lines[is_label]
+  label_pieces <- str_split_fixed(label_lines, ": ", 2)
+  labels <- data.frame(
+    label = seq_along(label_pieces), 
+    path = label_pieces[, 2],
+    stringsAsFactors = FALSE)
 
   # Parse profiling data -----------------
-  prof <- raw[!is_label, ]
+  prof_lines <- lines[!is_label]
+  prof <- as.data.frame(str_split_fixed(prof_lines, ":", 6), 
+    stringsAsFactors = FALSE)
   prof$V1 <- NULL
-  prof$V2 <- as.numeric(prof$V2)
   names(prof) <- c("small_v", "big_v", "nodes", "dups", "source")
-
+  prof[c("small_v", "big_v", "nodes", "dups")] <- lapply(
+    prof[c("small_v", "big_v", "nodes", "dups")], as.numeric)
+  
   # Add time info, and compute total memory (rounded to meg's)
   prof$time <- interval
   prof$mem <- (prof$small_v + prof$big_v + prof$nodes) / 1024 ^ 2
