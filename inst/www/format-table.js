@@ -67,7 +67,7 @@ Shiny.addCustomMessageHandler("formatTable",
         d["src"] = escape_html(data.src[i]);
       }
       
-      d["lineno"] = i;
+      d["lineno"] = i + 1;
       d["time"] = percent_bar(data.time[i], max_time, " s");
       d["release"] = percent_bar(data.release[i], max_release, " MB");
       d["alloc"] = percent_bar(data.alloc[i], max_alloc, " MB");
