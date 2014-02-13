@@ -68,6 +68,7 @@
 #' shine(x2)
 #' }
 #' @useDynLib lineprof
+#' @importFrom Rcpp sourceCpp
 lineprof <- function(code, interval = 0.001, torture = FALSE) {
   path <- line_profile(code, interval, torture)
   on.exit(unlink(path))
