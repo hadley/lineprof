@@ -2,7 +2,7 @@
 \alias{lineprof}
 \title{Line profiling.}
 \usage{
-  lineprof(code, interval = 0.001, torture = FALSE)
+lineprof(code, interval = 0.001, torture = FALSE)
 }
 \arguments{
   \item{code}{code to profile.}
@@ -22,18 +22,18 @@
   \code{interval}.}
 }
 \description{
-  \code{lineprof} uses R built-in time and memory profiler
-  \code{\link{Rprof}} to collect line profiling data and
-  displays it in ways that help you figure out where the
-  bottlenecks in your code R.
+\code{lineprof} uses R built-in time and memory profiler
+\code{\link{Rprof}} to collect line profiling data and
+displays it in ways that help you figure out where the
+bottlenecks in your code R.
 }
 \details{
-  R's profiler is a sampling profiler, which means that it
-  stops execution every \code{interval} seconds and records
-  the current call stack. This means that it is somewhat
-  random: if you run the profiler repeatedly on the same
-  code you'll see slightly different outputs depending on
-  exactly where the profiler stopped each time.
+R's profiler is a sampling profiler, which means that it
+stops execution every \code{interval} seconds and records
+the current call stack. This means that it is somewhat
+random: if you run the profiler repeatedly on the same code
+you'll see slightly different outputs depending on exactly
+where the profiler stopped each time.
 }
 \section{Profiling output}{
   For each sequence of calls, \code{lineprof} calculates:

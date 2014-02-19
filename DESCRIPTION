@@ -14,13 +14,4 @@ Imports:
 Suggests:
     shiny,
     shinySlickgrid
-Collate:
-    'lineprof.r'
-    'demo.r'
-    'RcppExports.R'
-    'parse-ref.r'
-    'profile.R'
-    'focus.r'
-    'visualise.r'
-    'shiny.r'
 LinkingTo: Rcpp (>= 0.11.0)

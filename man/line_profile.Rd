@@ -3,9 +3,9 @@
 \alias{parse_prof}
 \title{Profile and parse output}
 \usage{
-  line_profile(code, interval = 0.01, torture = FALSE)
+line_profile(code, interval = 0.01, torture = FALSE)
 
-  parse_prof(path)
+parse_prof(path)
 }
 \arguments{
   \item{path}{path to line profiling data}
@@ -27,8 +27,8 @@
   \code{interval}.}
 }
 \description{
-  These are useful if you want to see the interim output
-  that \code{\link{lineprof}} creates.
+These are useful if you want to see the interim output that
+\code{\link{lineprof}} creates.
 }
 \keyword{internal}
 

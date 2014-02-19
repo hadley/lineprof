@@ -2,20 +2,19 @@
 \alias{shine}
 \title{Generate shiny GUI for line profiling output}
 \usage{
-  shine(x)
+shine(x)
 }
 \arguments{
   \item{x}{a line profiling dataset}
 }
 \description{
-  The shiny GUI generates two types of view depending on
-  whether or not the src refs for the function are
-  available. If src refs are available, it aligns profiling
-  information with the original source code so that you can
-  easily see time and memory behaviour in the context of
-  the original code. If they are not available, it does the
-  best it can do, just displaying the sequence of calls
-  that it captured.
+The shiny GUI generates two types of view depending on
+whether or not the src refs for the function are available.
+If src refs are available, it aligns profiling information
+with the original source code so that you can easily see
+time and memory behaviour in the context of the original
+code. If they are not available, it does the best it can
+do, just displaying the sequence of calls that it captured.
 }
 \section{Display}{
   The shiny app creates a table with six columns:

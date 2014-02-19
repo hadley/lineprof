@@ -3,9 +3,9 @@
 \alias{focus}
 \title{Focus in on selected parts of the profile.}
 \usage{
-  focus(x, f = NULL, filename = NULL, ref = NULL)
+focus(x, f = NULL, filename = NULL, ref = NULL)
 
-  auto_focus(x)
+auto_focus(x)
 }
 \arguments{
   \item{x}{a line profile}
@@ -19,12 +19,11 @@
   \code{"filename.r#lineno"}}
 }
 \description{
-  \code{focus} allows you to navigate a complicated call
-  stack with a flexible navigation specification.
-  \code{auto_focus} is called automatically to zoom into
-  the file that occupies the majority of the current level
-  - this is particularly useful for
-  \code{\link{gctorture}}.
+\code{focus} allows you to navigate a complicated call
+stack with a flexible navigation specification.
+\code{auto_focus} is called automatically to zoom into the
+file that occupies the majority of the current level - this
+is particularly useful for \code{\link{gctorture}}.
 }
 \examples{
 # Line profiling the profile parsing code
