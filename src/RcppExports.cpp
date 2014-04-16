@@ -51,3 +51,15 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// pause
+void pause(double sec);
+RcppExport SEXP lineprof_pause(SEXP secSEXP) {
+BEGIN_RCPP
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< double >::type sec(secSEXP );
+        pause(sec);
+    }
+    return R_NilValue;
+END_RCPP
+}
