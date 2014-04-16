@@ -16,11 +16,10 @@ parseLineProfileRefs <- function(input) {
 #' Pause execution
 #'
 #' This is similar to \code{\link{Sys.sleep}} but is captured during
-#' profiling, making it useful when generating simple examples
+#' profiling, making it useful when generating simple examples.
 #'
 #' @export
-#' @param sec Number of seconds to pause (millsecond resolution). Currently
-#'   this is an underestimate of how long this function will take.
+#' @param sec Number of seconds to pause (millsecond resolution).
 pause <- function(sec) {
     invisible(.Call('lineprof_pause', PACKAGE = 'lineprof', sec))
 }

@@ -1,25 +1,22 @@
 #include <Rcpp.h>
 #include <unistd.h>
+#include <Rcpp/Benchmark/Timer.h>
 using namespace Rcpp;
-
 
 //' Pause execution
 //'
 //' This is similar to \code{\link{Sys.sleep}} but is captured during
-//' profiling, making it useful when generating simple examples
+//' profiling, making it useful when generating simple examples.
 //'
 //' @export
-//' @param sec Number of seconds to pause (millsecond resolution). Currently
-//'   this is an underestimate of how long this function will take.
+//' @param sec Number of seconds to pause (millsecond resolution).
 // [[Rcpp::export]]
 void pause(double sec) {
-  int mu_sec = sec * 1e6;
+  nanotime_t ns = sec * 1e9;
+  nanotime_t start = get_nanotime();
 
-  // Check for interrupts every ms
-  int times = mu_sec / 1e3;
-  for (int i = 0; i < times; ++i) {
-    usleep(mu_sec / 1e3);
+  while(get_nanotime() - start < ns) {
+    usleep(1e3); // check every 10 ms
     checkUserInterrupt();
   }
-  usleep(mu_sec - (times * 1e3));
 }

@@ -6,11 +6,10 @@
 pause(sec)
 }
 \arguments{
-\item{sec}{Number of seconds to pause (millsecond resolution). Currently
-this is an underestimate of how long this function will take.}
+\item{sec}{Number of seconds to pause (millsecond resolution).}
 }
 \description{
 This is similar to \code{\link{Sys.sleep}} but is captured during
-profiling, making it useful when generating simple examples
+profiling, making it useful when generating simple examples.
 }
 
