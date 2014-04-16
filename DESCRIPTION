@@ -15,3 +15,4 @@ Suggests:
     shiny,
     shinySlickgrid
 LinkingTo: Rcpp (>= 0.11.0)
+Roxygen: list(wrap = FALSE)
