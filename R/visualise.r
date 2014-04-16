@@ -45,7 +45,7 @@ reduce_depth <- function(x, depth = 2) {
   collapse(x, ignore.path = TRUE)
 }
 
-#' @S3method format lineprof
+#' @export
 format.lineprof <- function(x, digits = 3, ...) {
   x$alloc <- round(x$alloc, digits)
   x$release <- round(x$release, digits)

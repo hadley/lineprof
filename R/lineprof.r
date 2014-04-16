@@ -78,7 +78,7 @@ lineprof <- function(code, interval = 0.001, torture = FALSE) {
 
 is.lineprof <- function(x) inherits(x, "lineprof")
 
-#' @S3method [ lineprof
+#' @export
 "[.lineprof" <- function(x, ...) {
   out <- NextMethod()
   class(out) <- c("lineprof", "data.frame")
