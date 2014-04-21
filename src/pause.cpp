@@ -16,7 +16,6 @@ void pause(double sec) {
   nanotime_t start = get_nanotime();
 
   while(get_nanotime() - start < ns) {
-    usleep(1e3); // check every 10 ms
     checkUserInterrupt();
   }
 }
