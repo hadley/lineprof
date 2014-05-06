@@ -45,8 +45,6 @@
 #' shine(x)
 #' }
 shine <- function(x) {
-  require(shiny)
-
   stack <- new_stack(x)
 
   navigate <- function(ref) {
@@ -69,14 +67,14 @@ shine <- function(x) {
 
     update_table()
 
-    observe({
+    shiny::observe({
       if (is.null(input$navigate)) return()
 
       navigate(input$navigate)
       update_table()
     })
 
-    observe({
+    shiny::observe({
       if (input$back == 0) return()
 
       message("Backing up")
@@ -85,23 +83,28 @@ shine <- function(x) {
     })
   }
 
-  addResourcePath("lineprof", system.file("www", package = "lineprof"))
-  ui <- bootstrapPage(
-    tags$div(class = "span12", style = "padding: 10px 0px;",
-      tags$h1("Line profiling", actionButton("back", "Back"))
+  shiny::addResourcePath("lineprof", system.file("www", package = "lineprof"))
+  ui <- shiny::bootstrapPage(
+    shiny::tags$div(class = "span12", style = "padding: 10px 0px;",
+      shiny::tags$h1("Line profiling", shiny::actionButton("back", "Back"))
     ),
-    mainPanel(
+    shiny::mainPanel(
       slickgridOutput("profile"),
-      tags$head(
-        tags$script(src = 'lineprof/format-table.js'),
-        tags$link(href = "lineprof/table.css", rel = "stylesheet",
+      shiny::tags$head(
+        shiny::tags$script(src = 'lineprof/format-table.js'),
+        shiny::tags$link(href = "lineprof/table.css", rel = "stylesheet",
           type = "text/css")
       )
     )
   )
 
-  runApp(list(ui = ui, server = server),
-    launch.browser = getOption("viewer", utils::browseURL))
+  message(
+    "Starting interactive profile explorer.\n",
+    "Press Escape / Ctrl + C to exit"
+  )
+  shiny::runApp(list(ui = ui, server = server),
+    launch.browser = getOption("viewer", utils::browseURL),
+    quiet = TRUE)
 }
 
 # x <- new_stack()

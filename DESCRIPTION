@@ -10,8 +10,7 @@ Description: lineprof provides an informative, html-based, visualisation of
 LazyData: true
 Imports:
     stringr,
-    Rcpp
-Suggests:
+    Rcpp,
     shiny
 LinkingTo: Rcpp (>= 0.11.0)
 Roxygen: list(wrap = FALSE)
