@@ -1,0 +1,55 @@
+---
+Title: Exploring the resolution of the profiling timer
+---
+
+```{r}
+library(lineprof)
+
+f <- function() {
+  pause(0.01)
+}
+g <- function() {
+  pause(0.01)
+}
+```
+
+```{r}
+capture <- function(interval) {
+  tmp <- tempfile()
+  on.exit(tmp)
+  Rprof(tmp, interval = interval)
+  for(i in 1:100) {
+    f()
+    g()
+  }
+  Rprof(NULL)
+  
+  out <- readLines(tmp)
+  depth <- sys.nframe()
+  last <- function(x) {
+    if (length(x) <= depth) {
+      x[1]
+    } else {
+      x[length(x) - depth]  
+    }
+  }
+  refs <- lapply(out[-1], parseLineProfileRefs)
+  tip <- vapply(refs, function(x) last(x[[1]]), character(1), USE.NAMES = FALSE)
+  tip <- tip[tip %in% c("f", "g")]
+  
+  df <- as.data.frame(unclass(rle(tip)))
+  df$id <- seq_len(nrow(df))
+  df$interval <- interval
+  df$time <- df$interval * df$lengths
+  df  
+}
+```
+
+```{r}
+intervals <- 10 ^ -(2:6)
+all <- plyr::ldply(intervals, capture)
+# 
+# library(ggplot2)
+# qplot(id, lengths, data = df, fill = values, geom = "bar", stat = "identity")
+# qplot(lengths, data = df, geom = "freqpoly", binwidth = 1)
+```

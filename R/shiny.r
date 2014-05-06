@@ -46,7 +46,6 @@
 #' }
 shine <- function(x) {
   require(shiny)
-  require(shinySlickgrid)
 
   stack <- new_stack(x)
 
@@ -101,7 +100,7 @@ shine <- function(x) {
     )
   )
 
-  runApp(list(ui = ui, server = server), 
+  runApp(list(ui = ui, server = server),
     launch.browser = getOption("viewer", utils::browseURL))
 }
 
