@@ -50,9 +50,9 @@ shine <- function(x) {
   navigate <- function(ref) {
     message("Navigating to ", ref)
     if (grepl('"', ref, fixed = TRUE)) {
-      zoomed <- focus(x, f = eval(parse(text = ref)))
+      zoomed <- focus(stack$top(), f = eval(parse(text = ref)))
     } else {
-      zoomed <- focus(x, ref = ref)
+      zoomed <- focus(stack$top(), ref = ref)
     }
     zoomed <- auto_focus(zoomed)
 
