@@ -8,7 +8,7 @@ Title: An alternative display for line profiling information
 Description: lineprof provides an informative, html-based, visualisation of
     line profiling data for both time and memory.
 LazyData: true
-Depends: R (>= 3.0.2)
+Depends: R (>= 3.1.0)
 Imports:
     stringr,
     Rcpp,

@@ -57,7 +57,7 @@
 #' @export
 #' @examples
 #' source(find_ex("read-delim.r"))
-#' source(find_ex("read-table.r"))
+#' source(find_ex("read-table.r")) # local copy so get line numbers
 #' wine <- find_ex("wine.csv")
 #'
 #' x1 <- lineprof(read.table2(wine, sep = ","), torture = TRUE)
