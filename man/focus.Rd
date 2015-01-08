@@ -25,6 +25,7 @@ into the file that occupies the majority of the current level - this is
 particularly useful for \code{\link{gctorture}}.
 }
 \examples{
+\dontrun{
 # Line profiling the profile parsing code
 (x <- lineprof(parse_prof(find_ex("read-delim.prof"))))
 
@@ -37,5 +38,6 @@ align(x2)
 
 # Zoom into line 21
 (x3 <- focus(x2, ref = "parse-ref.r#21"))
+}
 }
 

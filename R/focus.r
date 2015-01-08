@@ -11,6 +11,7 @@
 #' @param ref a reference of the form \code{"filename.r#lineno"}
 #' @export
 #' @examples
+#' \dontrun{
 #' # Line profiling the profile parsing code
 #' (x <- lineprof(parse_prof(find_ex("read-delim.prof"))))
 #'
@@ -23,6 +24,7 @@
 #'
 #' # Zoom into line 21
 #' (x3 <- focus(x2, ref = "parse-ref.r#21"))
+#' }
 focus <- function(x, f = NULL, filename = NULL, ref = NULL) {
   stopifnot(is.lineprof(x))
 
