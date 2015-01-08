@@ -14,3 +14,5 @@ Imports:
     shiny
 LinkingTo: Rcpp (>= 0.11.0)
 Roxygen: list(wrap = FALSE)
+Suggests:
+    testthat
