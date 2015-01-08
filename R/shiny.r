@@ -140,7 +140,7 @@ new_stack <- function(init = NULL) {
 
 json <- function(x) {
   path <- unique(paths(x))
-  if (length(path) == 1 && !is.na(path)) {
+  if (length(path) == 1 && file.exists(path)) {
     align(x)
   } else {
     format(reduce_depth(x, 2))
