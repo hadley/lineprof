@@ -73,13 +73,13 @@ profiling data with the original source code.
 }
 \examples{
 source(find_ex("read-delim.r"))
-source(find_ex("read-table.r"))
+source(find_ex("read-table.r")) # local copy so get line numbers
 wine <- find_ex("wine.csv")
 
+\dontrun{
 x1 <- lineprof(read.table2(wine, sep = ","), torture = TRUE)
 x2 <- lineprof(read_delim(wine), torture = TRUE)
 
-\dontrun{
 shine(x1)
 shine(x2)
 }

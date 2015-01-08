@@ -51,8 +51,8 @@ To go back to the previous call, click on the back button.
 source(find_ex("read-delim.r"))
 wine <- find_ex("wine.csv")
 
-x <- lineprof(read_delim(wine, sep = ","), torture = TRUE)
 \dontrun{
+x <- lineprof(read_delim(wine, sep = ","), torture = TRUE)
 shine(x)
 }
 }
