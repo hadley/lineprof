@@ -47,18 +47,6 @@
 shine <- function(x) {
   stack <- new_stack(x)
 
-  navigate <- function(ref) {
-    message("Navigating to ", ref)
-    if (grepl('"', ref, fixed = TRUE)) {
-      zoomed <- focus(x, f = eval(parse(text = ref)))
-    } else {
-      zoomed <- focus(x, ref = ref)
-    }
-    zoomed <- auto_focus(zoomed)
-
-    stack$push(zoomed)
-  }
-
   server <- function(input, output, session) {
     update_table <- function() {
       msg <- json(stack$top())
@@ -70,7 +58,7 @@ shine <- function(x) {
     shiny::observe({
       if (is.null(input$navigate)) return()
 
-      navigate(input$navigate)
+      navigate(input$navigate, stack)
       update_table()
     })
 
@@ -138,9 +126,21 @@ new_stack <- function(init = NULL) {
   list(pop = pop, push = push, top = top)
 }
 
+navigate <- function(ref, stack) {
+  message("Navigating to ", ref)
+  if (grepl('"', ref, fixed = TRUE)) {
+    zoomed <- focus(stack$top(), f = eval(parse(text = ref)))
+  } else {
+    zoomed <- focus(stack$top(), ref = ref)
+  }
+  zoomed <- auto_focus(zoomed)
+
+  stack$push(zoomed)
+}
+
 json <- function(x) {
   path <- unique(paths(x))
-  if (length(path) == 1 && !is.na(path)) {
+  if (length(path) == 1 && file.exists(path)) {
     align(x)
   } else {
     format(reduce_depth(x, 2))

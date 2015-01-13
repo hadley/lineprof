@@ -1,0 +1,29 @@
+memory profiling: GC profiling: line profiling: sample.interval=10000
+#File 1: /Users/forest/GitHub/lineprof/R/RcppExports.R
+#File 2: <text>
+#File 3: /Users/forest/GitHub/lineprof/R/profile.R
+#File 4: ~/.active-rstudio-document
+:277955:452237:27596408:39:".Call" 1#24 "pause" "identity" "identity" 2#2 "quick" 2#5 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452237:27596408:0:".Call" 1#24 "pause" "identity" "identity" 2#2 "quick" 2#5 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452237:27596408:0:".Call" 1#24 "pause" "identity" "identity" 2#2 "quick" 2#5 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452237:27596408:0:".Call" 1#24 "pause" "identity" "identity" 2#2 "quick" 2#5 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452237:27596408:0:".Call" 1#24 "pause" "identity" "identity" 2#2 "quick" 2#5 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452237:27596408:0:".Call" 1#24 "pause" "identity" "identity" 2#2 "quick" 2#5 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452237:27596408:0:".Call" 1#24 "pause" "identity" "identity" 2#2 "quick" 2#5 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452237:27596408:0:".Call" 1#24 "pause" "identity" "identity" 2#2 "quick" 2#5 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
+:277955:452550:27597640:0:".Call" 1#24 "pause" "identity" "identity" 2#3 "slow" 2#6 "eval" "eval" "force" 3#21 "line_profile" 4#1 "eval" "eval" "withVisible" "source" 
