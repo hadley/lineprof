@@ -69,11 +69,15 @@
 #' }
 #' @useDynLib lineprof
 #' @importFrom Rcpp sourceCpp
-lineprof <- function(code, interval = 0.001, torture = FALSE) {
-  path <- line_profile(code, interval, torture)
-  on.exit(unlink(path))
+lineprof <- function(code, interval = 0.001, torture = FALSE, prof_path = "") {
 
-  parse_prof(path)
+  if (prof_path=="") {
+	prof_path <- tempfile(fileext = ".prof")
+    on.exit(unlink(prof_path))
+  }
+
+  line_profile(code, interval, torture, prof_path)
+  parse_prof(prof_path)
 }
 
 is.lineprof <- function(x) inherits(x, "lineprof")
