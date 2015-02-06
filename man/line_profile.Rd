@@ -5,7 +5,7 @@
 \alias{parse_prof}
 \title{Profile and parse output}
 \usage{
-line_profile(code, interval = 0.01, torture = FALSE)
+line_profile(code, interval = 0.001, torture = FALSE, prof_path)
 
 parse_prof(path)
 }
@@ -22,6 +22,10 @@ set it to something larger.}
 if you want to see exactly when memory is released. It also makes R run
 extremely slowly (10-100x slower than usual) so it can also be useful to
 simulate a smaller \code{interval}.}
+
+\item{prof_path}{path to file where the raw profiling output should be saved.
+The default value, \code{""}, writes the raw data to a temporary file that
+that is deleted when the program exits.}
 
 \item{path}{path to line profiling data}
 }

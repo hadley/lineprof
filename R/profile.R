@@ -6,7 +6,7 @@
 #' @keywords internal
 #' @inheritParams lineprof
 #' @export
-line_profile <- function(code, interval = 1.01, torture = FALSE, prof_path) {
+line_profile <- function(code, interval = 0.001, torture = FALSE, prof_path) {
 
   if (torture) {
     gctorture(TRUE)
