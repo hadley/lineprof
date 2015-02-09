@@ -4,7 +4,7 @@
 \alias{lineprof}
 \title{Line profiling.}
 \usage{
-lineprof(code, interval = 0.001, torture = FALSE, prof_path = "")
+lineprof(code, interval = 0.001, torture = FALSE, prof_path = NULL)
 }
 \arguments{
 \item{code}{code to profile.}
@@ -21,7 +21,7 @@ extremely slowly (10-100x slower than usual) so it can also be useful to
 simulate a smaller \code{interval}.}
 
 \item{prof_path}{path to file where the raw profiling output should be saved.
-The default value, \code{""}, writes the raw data to a temporary file that
+The default value, \code{NULL}, writes the raw data to a temporary file that
 that is deleted when the program exits.}
 }
 \description{

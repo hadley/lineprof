@@ -55,7 +55,7 @@
 #'   extremely slowly (10-100x slower than usual) so it can also be useful to
 #'   simulate a smaller \code{interval}.
 #' @param prof_path path to file where the raw profiling output should be saved.
-#'   The default value, \code{""}, writes the raw data to a temporary file that 
+#'   The default value, \code{NULL}, writes the raw data to a temporary file that 
 #'   that is deleted when the program exits.
 #' @export
 #' @examples
@@ -72,14 +72,14 @@
 #' }
 #' @useDynLib lineprof
 #' @importFrom Rcpp sourceCpp
-lineprof <- function(code, interval = 0.001, torture = FALSE, prof_path = "") {
+lineprof <- function(code, interval = 0.001, torture = FALSE, prof_path = NULL) {
 
-  if (prof_path=="") {
-	prof_path <- tempfile(fileext = ".prof")
+  if (is.null(prof_path)) {
+    prof_path <- tempfile(fileext = ".prof")
     on.exit(unlink(prof_path))
   }
 
-  line_profile(code, interval, torture, prof_path)
+  line_profile(code, prof_path, interval, torture)
   parse_prof(prof_path)
 }
 
