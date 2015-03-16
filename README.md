@@ -38,4 +38,4 @@ You can navigate around the call stack by clicking on the link source code. Hove
 
 ## Thanks
 
-A big thanks go to Duncan Murdoch and Luke Tierney for creating the line profiling code questions and answering my many questions about how it works. Similar, I'd like to thank Joe Cheng and Winston Chang for answering all my questions about shiny.
+A big thanks go to Duncan Murdoch and Luke Tierney for creating the line profiling code and answering my many questions about how it works. Similar, I'd like to thank Joe Cheng and Winston Chang for answering all my questions about shiny.
