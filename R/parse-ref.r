@@ -25,9 +25,9 @@ parse_ref <- function(ref, paths) {
   df <- data.frame(f = rev(f), path = rev(path), line = rev(line),
     stringsAsFactors = FALSE)
 
-  # Remove entries added by profile and force
+  # Remove entries added by profile, tryCatch, and force
   # (and any functions that call lineprof)
-  discard_to <- which(df$f == "line_profile") + 1
+  discard_to <- which(df$f == "line_profile") + 9
 
   df[-seq_len(discard_to), , drop = FALSE]
 }
