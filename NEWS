@@ -1,0 +1,4 @@
+Version 0.1.9xxx
+==============
+
+* `lineprof` now handles code that throws errors or is interrupted.

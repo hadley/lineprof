@@ -1,6 +1,6 @@
 Package: lineprof
 Type: Package
-Version: 0.1
+Version: 0.1.9001
 Authors@R: person("Hadley", "Wickham",
     email = "hadley@rstudio.com", role = c("aut", "cre"))
 License: GPL-3
