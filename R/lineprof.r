@@ -54,6 +54,9 @@
 #'   if you want to see exactly when memory is released. It also makes R run
 #'   extremely slowly (10-100x slower than usual) so it can also be useful to
 #'   simulate a smaller \code{interval}.
+#' @param prof_path path to file where the raw profiling output should be saved.
+#'   The default value, \code{NULL}, writes the raw data to a temporary file that 
+#'   that is deleted when the program exits.
 #' @export
 #' @examples
 #' source(find_ex("read-delim.r"))
@@ -69,11 +72,15 @@
 #' }
 #' @useDynLib lineprof
 #' @importFrom Rcpp sourceCpp
-lineprof <- function(code, interval = 0.001, torture = FALSE) {
-  path <- line_profile(code, interval, torture)
-  on.exit(unlink(path))
+lineprof <- function(code, interval = 0.001, torture = FALSE, prof_path = NULL) {
 
-  parse_prof(path)
+  if (is.null(prof_path)) {
+    prof_path <- tempfile(fileext = ".prof")
+    on.exit(unlink(prof_path))
+  }
+
+  line_profile(code, prof_path, interval, torture)
+  parse_prof(prof_path)
 }
 
 is.lineprof <- function(x) inherits(x, "lineprof")

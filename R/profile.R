@@ -6,8 +6,7 @@
 #' @keywords internal
 #' @inheritParams lineprof
 #' @export
-line_profile <- function(code, interval = 0.01, torture = FALSE) {
-  prof_path <- tempfile(fileext = ".prof")
+line_profile <- function(code, prof_path, interval = 0.001, torture = FALSE) {
 
   if (torture) {
     gctorture(TRUE)
@@ -24,7 +23,6 @@ line_profile <- function(code, interval = 0.01, torture = FALSE) {
     interrupt = function(e) NULL
   )
 
-  prof_path
 }
 
 #' @rdname line_profile

@@ -5,12 +5,16 @@
 \alias{parse_prof}
 \title{Profile and parse output}
 \usage{
-line_profile(code, interval = 0.01, torture = FALSE)
+line_profile(code, prof_path, interval = 0.001, torture = FALSE)
 
 parse_prof(path)
 }
 \arguments{
 \item{code}{code to profile.}
+
+\item{prof_path}{path to file where the raw profiling output should be saved.
+The default value, \code{NULL}, writes the raw data to a temporary file that
+that is deleted when the program exits.}
 
 \item{interval}{interval, in seconds, between profile snapshots. R's timer
 has a resolution of at best 1 ms, so there's no reason to make this value
